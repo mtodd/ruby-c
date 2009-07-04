@@ -34,7 +34,15 @@ desc "Clean then compile"
 task :clean_and_compile => [:clean, :compile]
 task :cnc => :clean_and_compile
 
+task :all do
+  %w(basic intermediate advanced).each do |level|
+    %x{env EXT=#{level} rake generate_makefile}
+    %x{env EXT=#{level} rake compile}
+  end
+  %x{rake}
+end
+
 def do_run cmd, context = "samples/#{ENV['EXT']}"
   pwd = Dir.pwd
-  %x{cd "#{context}" && #{cmd}; cd "#{pwd}"}
+  %x{cd "#{context}" && env EXT=#{ENV['EXT']} #{cmd}; cd "#{pwd}"}
 end
