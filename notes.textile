@@ -49,3 +49,5 @@ h2. Resources
 * http://blog.jacius.info/articles/2007/11/17/ruby-c-extension-cheat-sheet
 * http://drnicwilliams.com/2008/04/01/writing-c-extensions-in-rubygems/
 * http://macournoyer.wordpress.com/2008/04/16/ruby-to-c-a-couple-snippets/
+* http://people.apache.org/~rooneg/talks/ruby-extensions/ruby-extensions.html
+* http://banisterfiend.wordpress.com/2008/09/25/metaprogramming-in-the-ruby-c-api-part-one-blocks/
