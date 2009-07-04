@@ -1,0 +1,22 @@
+h1. Ruby Extensions in C
+
+h2. Topics
+
+* modules
+* classes
+* methods
+* data types
+* instance variables
+* blocks
+* mixing in modules
+* interfacing with external C libs
+* evented programming
+
+h2. Resources
+
+* http://rubycentral.com/pickaxe/ext_ruby.html
+* http://www.rubyinside.com/how-to-create-a-ruby-extension-in-c-in-under-5-minutes-100.html
+* http://java.ociweb.com/mark/NFJS/RubyCExtensions.pdf
+* http://blog.jacius.info/articles/2007/11/17/ruby-c-extension-cheat-sheet
+* http://drnicwilliams.com/2008/04/01/writing-c-extensions-in-rubygems/
+* http://macournoyer.wordpress.com/2008/04/16/ruby-to-c-a-couple-snippets/
