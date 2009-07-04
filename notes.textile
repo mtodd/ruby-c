@@ -2,15 +2,43 @@ h1. Ruby Extensions in C
 
 h2. Topics
 
-* modules
-* classes
-* methods
-* data types
-* instance variables
-* blocks
-* mixing in modules
-* interfacing with external C libs
-* evented programming
+* Basics
+** classes & modules
+*** module & class definitions
+*** methods & attributes
+** objects
+*** calling methods
+*** instance variables
+** control structures
+*** loops
+*** conditionals
+*** iterators
+** data (Ruby <=> C)
+*** strings
+*** integers
+*** hashes
+*** structs
+*** regular expressions
+*** symbols
+
+* Intermediate
+** blocks
+** memory management
+** File/Network IO
+** ActiveRecord
+
+* Advanced
+** metaprogramming
+*** method_missing
+*** generate methods dynamically
+*** redefine existing method
+** Rack Application
+** threading
+** evented programming
+** parsing XML/JSON
+
+* Testing
+* Building & Running
 
 h2. Resources
 
