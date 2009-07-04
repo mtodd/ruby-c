@@ -21,7 +21,7 @@ task :clean do
 end
 
 desc "Generate the Makefile used to compile"
-task :generate_makefile do
+task :generate_makefile => [:clean] do
   do_run "ruby extconf.rb"
 end
 
@@ -39,10 +39,13 @@ task :all do
     %x{env EXT=#{level} rake generate_makefile}
     %x{env EXT=#{level} rake compile}
   end
-  %x{rake}
+  puts %x{rake}
 end
 
 def do_run cmd, context = "samples/#{ENV['EXT']}"
   pwd = Dir.pwd
-  %x{cd "#{context}" && env EXT=#{ENV['EXT']} #{cmd}; cd "#{pwd}"}
+  # cmd += " --trace" if cmd =~ /rake/ && true
+  cmd = %(cd "#{context}" && env EXT=#{ENV['EXT']} #{cmd}; cd "#{pwd}")
+  puts cmd
+  puts "=> %s" % %x{#{cmd}}
 end
