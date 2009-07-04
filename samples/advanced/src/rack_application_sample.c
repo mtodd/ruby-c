@@ -17,7 +17,19 @@ void Init_rack_application_sample();
 
 VALUE rb_rack_application_call(VALUE env);
 VALUE rb_rack_application_call(VALUE env) {
-  VALUE response = Qnil;
+  VALUE body      = rb_str_new2("OK");
+  VALUE status    = INT2NUM(200);
+  VALUE response  = rb_ary_new();
+  VALUE headers   = rb_hash_new();
+  
+  rb_hash_aset(headers, rb_str_new2("Content-Type"), rb_str_new2("text/plain"));
+  rb_hash_aset(headers, rb_str_new2("Content-Length"), rb_funcall(INT2NUM(RSTRING(body)->len), rb_intern("to_s"), 0));
+  // rb_hash_aset(headers, rb_str_new2("Content-Length"), rb_str_new2(NUM2CHR(INT2NUM(RSTRING(body)->len))));
+  
+  rb_ary_push(response, status);
+  rb_ary_push(response, headers);
+  rb_ary_push(response, body);
+  
   return response;
 }
 
