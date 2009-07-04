@@ -3,23 +3,23 @@ require 'rack'
 require 'rack/mock'
 require 'benchmark'
 
-class << Benchmark
-  if !const_defined?(:Rails) or Rails::VERSION::STRING < '2.3.0'
-    def ms
-      1000 * realtime { yield }
-    end
-  end
-end
+# class << Benchmark
+#   if !const_defined?(:Rails) or Rails::VERSION::STRING < '2.3.0'
+#     def ms
+#       1000 * realtime { yield }
+#     end
+#   end
+# end
 
-class RackApplicationSampleRubyEquivalent
-  def call(env)
-    body = "OK"
-    [ 200,
-      { 'Content-Type'=>'text/plain',
-        'Content-Length'=> body.size.to_s },
-      body ]
-  end
-end
+# class RackApplicationSampleRubyEquivalent
+#   def call(env)
+#     body = "OK"
+#     [ 200,
+#       { 'Content-Type'=>'text/plain',
+#         'Content-Length'=> body.size.to_s },
+#       body ]
+#   end
+# end
 
 class RackApplicationSampleTest < Test::Unit::TestCase
   

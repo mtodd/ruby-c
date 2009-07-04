@@ -43,6 +43,7 @@ h2. Topics
 h2. Resources
 
 * http://rubycentral.com/pickaxe/ext_ruby.html
+* http://www.eqqon.com/index.php/Ruby_C_Extension
 * http://www.rubyinside.com/how-to-create-a-ruby-extension-in-c-in-under-5-minutes-100.html
 * http://java.ociweb.com/mark/NFJS/RubyCExtensions.pdf
 * http://blog.jacius.info/articles/2007/11/17/ruby-c-extension-cheat-sheet

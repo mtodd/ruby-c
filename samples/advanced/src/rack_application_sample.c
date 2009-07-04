@@ -24,7 +24,6 @@ VALUE rb_rack_application_call(VALUE env) {
   
   rb_hash_aset(headers, rb_str_new2("Content-Type"), rb_str_new2("text/plain"));
   rb_hash_aset(headers, rb_str_new2("Content-Length"), rb_funcall(INT2NUM(RSTRING(body)->len), rb_intern("to_s"), 0));
-  // rb_hash_aset(headers, rb_str_new2("Content-Length"), rb_str_new2(NUM2CHR(INT2NUM(RSTRING(body)->len))));
   
   rb_ary_push(response, status);
   rb_ary_push(response, headers);
