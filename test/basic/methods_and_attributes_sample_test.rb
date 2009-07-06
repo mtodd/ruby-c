@@ -39,3 +39,27 @@ class MethodsSampleTest < Test::Unit::TestCase
   end
   
 end
+
+class AttributesSampleTest < Test::Unit::TestCase
+  
+  def setup
+    @attributes = AttributesSample.new
+  end
+  
+  def test_one_is_available_as_an_attribute
+    assert @attributes.respond_to?(:one)
+    assert @attributes.respond_to?(:one=)
+    assert @attributes.one.nil?
+    assert @attributes.instance_variable_get("@one").nil?
+    @attributes.one = 1
+    assert_equal 1, @attributes.instance_variable_get("@one")
+    assert_equal 1, @attributes.one
+  end
+  
+  def test_first_gets_the_value_of_the_instance_attribute_one
+    assert @attributes.first.nil? # it's not been set yet
+    @attributes.instance_variable_set("@one", 1)
+    assert_equal 1, @attributes.first
+  end
+  
+end

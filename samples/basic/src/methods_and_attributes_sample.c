@@ -1,5 +1,4 @@
 #include "ruby.h"
-#include "st.h"
 
 // topics:
 // * methods
@@ -7,7 +6,7 @@
 // *** mandatory params
 // *** optional params & handling defaults
 // *** option-hashes
-// *** blocks
+// *** blocks => intermediate samples
 // ** method invocation
 // * attributes
 // ** instance variables
@@ -15,11 +14,19 @@
 // ** getters and setters
 // ** class variables=
 
+VALUE MethodsAndAttributesSample = Qnil;
+
+VALUE MethodsSample = Qnil;
+
+VALUE AttributesSample = Qnil;
+VALUE AttributesSample_one = Qnil;
+
+void Init_methods_and_attributes_sample();
+
+// Methods
+
 // Equivalent Ruby Implementation:
 /*
-  class MethodsAndAttributesSample
-  end
-  
   class MethodsSample
     def first
       true
@@ -43,15 +50,6 @@
     #
   end
 */
-
-VALUE MethodsAndAttributesSample = Qnil;
-
-VALUE MethodsSample = Qnil;
-VALUE AttributesSample = Qnil;
-
-void Init_methods_and_attributes_sample();
-
-// Methods
 
 VALUE rb_methods_sample_first(VALUE self) {
   return Qtrue;
@@ -79,21 +77,6 @@ VALUE rb_methods_sample_fourth(int argc, VALUE *args, VALUE self) {
   return response;
 }
 
-// def fifth(a, options = {})
-//   options = {:z => true}.merge(options)
-//   a if options[:z]
-// end
-
-// pulled from hash.c
-static int
-keys_i(key, value, ary)
-    VALUE key, value, ary;
-{
-    if (key == Qundef) return ST_CONTINUE;
-    rb_ary_push(ary, key);
-    return ST_CONTINUE;
-}
-
 VALUE rb_methods_sample_fifth(int argc, VALUE *args, VALUE self) {
   VALUE a, options, default_options, keys, key;
   VALUE z = rb_str_new2("z");
@@ -103,15 +86,8 @@ VALUE rb_methods_sample_fifth(int argc, VALUE *args, VALUE self) {
   // default options
   default_options = rb_hash_new();
   rb_hash_aset(default_options, z, Qtrue);
+  
   options = rb_funcall(default_options, rb_intern("merge"), 1, options);
-  
-  // options = {"z" => true}.merge(options)
-  // keys = rb_hash_keys(options_input);
-  // keys = rb_ary_new();
-  // rb_hash_foreach(options_input, keys_i, keys);
-  // while(key = rb_ary_pop(keys)) { rb_hash_aset(options, key, rb_hash_aref(options_input, key)); }
-  
-  // rb_hash_aset(options, rb_str_new2("value"), a); options.merge! "value" => a
   
   if(rb_hash_aref(options, z) == Qtrue){ return options; }
   return Qnil;
@@ -126,9 +102,40 @@ void Init_methods_sample() {
   rb_define_method(MethodsSample, "fifth", rb_methods_sample_fifth, -1);
 }
 
+// Attributes
+
+// Equivalent Ruby Implementation:
+/*
+  class AttributesSample
+    attr_accessor :one
+    def first
+      self.one
+    end
+    def first=(a)
+      self.one = a
+    end
+  end
+*/
+
+VALUE rb_attributes_sample_first(VALUE self) {
+  return rb_iv_get(self, "@one");
+}
+
+VALUE rb_attributes_sample_first_assign(VALUE self, VALUE value) {
+  return rb_iv_set(self, "@one", value);
+}
+
+void Init_attributes_sample() {
+  AttributesSample = rb_define_class("AttributesSample", rb_cObject);
+  rb_define_method(AttributesSample, "first", rb_attributes_sample_first, 0);
+  rb_define_method(AttributesSample, "first=", rb_attributes_sample_first_assign, 1);
+  rb_define_attr(AttributesSample_one, "one", 1, 1); // read=1, write=1
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 void Init_methods_and_attributes_sample() {
   MethodsAndAttributesSample = rb_define_class("MethodsAndAttributesSample", rb_cObject);
   Init_methods_sample();
+  Init_attributes_sample();
 }
