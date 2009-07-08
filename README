@@ -1,0 +1,18 @@
+= Ruby Extensions in C
+
+Materials for a presentation covering Ruby Extensions in C, given on July 8,
+2009 by Matt Todd for the Atlanta Ruby User Group.
+
+= Usage
+
+Compile everything and run the tests with:
+
+  rake all
+
+= Copyright
+
+Copyright (C) 2009 Matt Todd. All rights reserved.
+
+= License
+
+MIT License
